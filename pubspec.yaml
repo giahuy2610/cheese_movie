@@ -37,6 +37,7 @@ dependencies:
   chewie: ^1.3.4
   provider: ^6.0.3
   http: ^0.13.5
+  glassmorphism: ^3.0.0
 
 dev_dependencies:
   flutter_test:

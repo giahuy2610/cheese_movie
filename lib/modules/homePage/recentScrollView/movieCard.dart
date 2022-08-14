@@ -18,9 +18,9 @@ class MovieCard extends StatelessWidget {
           width: Const.screenWidth * 0.6,
           margin: EdgeInsets.symmetric(horizontal: 20),
           constraints: BoxConstraints(maxWidth: Const.screenWidth * 0.6),
-          child: Column(
+          child: Stack(
             children: [
-              Expanded(
+              Container(
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: Image.network(
@@ -29,20 +29,25 @@ class MovieCard extends StatelessWidget {
                     )),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+                alignment: Alignment.bottomLeft,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.name,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      movie.originName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                       softWrap: false,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.fade,
                     ),
                     Text(
-                      movie.actors.toString(),
+                      movie.name,
                       softWrap: false,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.fade,
                     )
                   ],
                 ),

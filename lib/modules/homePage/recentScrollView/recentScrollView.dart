@@ -5,10 +5,16 @@ import '../../../common/movie/movie.dart';
 import '../../../models/futureGetMovies.dart';
 import '../../../models/futureGetMoviesByNewUpdated.dart';
 import '../../../providers/const.dart';
+import 'dart:async';
 
-class RecentScrollView extends StatelessWidget {
+class RecentScrollView extends StatefulWidget {
   const RecentScrollView({Key? key}) : super(key: key);
 
+  @override
+  State<RecentScrollView> createState() => _RecentScrollViewState();
+}
+
+class _RecentScrollViewState extends State<RecentScrollView> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Playlist>(
@@ -18,31 +24,47 @@ class RecentScrollView extends StatelessWidget {
             List<String> slugList = snapshot.data?.listOfMovies as List<String>;
             return Container(
               constraints: BoxConstraints(maxHeight: Const.screenHeight * 0.7),
-              child: Column(children: [
-                Text('Phim mới'),
-                Expanded(
-                    child: PageView(
-                  controller:
-                      PageController(initialPage: 0, viewportFraction: 0.8),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (String e in slugList)
-                      FutureBuilder<Movie>(
-                        future: FutureGetMovies(e),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return MovieCard(snapshot.data);
-                          } else
-                            return Text('${snapshot.error}');
-                        },
-                      ),
-                  ],
-                ))
-              ]),
+                    Container(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            'Phim mới',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        )),
+                    Expanded(
+                        child: PageView(
+                      controller:
+                          PageController(initialPage: 0, viewportFraction: 0.8)
+,
+                      children: [
+                        for (String e in slugList)
+                          FutureBuilder<Movie>(
+                            future: FutureGetMovies(e),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return MovieCard(snapshot.data);
+                              } else if (snapshot.hasError)
+                                return Text('${snapshot.error}');
+                              else
+                                return Container();
+                            },
+                          ),
+                      ],
+                    ))
+                  ]),
             );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
-          return const CircularProgressIndicator();
+          return Container();
         });
   }
 }

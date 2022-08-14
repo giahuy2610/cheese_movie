@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import '../../providers/const.dart';
+import '../categoryPage/filterByCategoryPage/filteredByCategoryPage.dart';
 
 class CategoryButton extends StatelessWidget {
   final text;
@@ -21,8 +22,9 @@ class CategoryButton extends StatelessWidget {
         height: 80,
         child: InkWell(
             onTap: () {
-              print(path);
-              //Navigator.push(context, MaterialPageRoute(builder: builder))
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return FilteredByCategoryPage(text, path);
+              }));
             },
             child: Container(
               child: Text(this.text),

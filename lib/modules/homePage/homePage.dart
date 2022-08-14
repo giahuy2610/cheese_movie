@@ -1,5 +1,6 @@
 import 'package:cheese_movie/modules/homePage/recentScrollView/recentScrollView.dart';
 import 'package:flutter/material.dart';
+import './continuteWatchingScrollView/continuteWatchingScrollView.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,10 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
         child: ListView(
-      children: [
-        RecentScrollView(),
-        RecentScrollView(),
-      ],
+      children: [RecentScrollView(), ContinuteWatchingScrollView()],
     ));
   }
 }

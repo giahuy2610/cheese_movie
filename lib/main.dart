@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:chewie/chewie.dart';
-import 'package:video_player/video_player.dart';
 import './modules/homePage/homePage.dart';
-import './modules/homePage/bottomNavigation.dart';
-import './providers/const.dart';
 import './providers/controller.dart';
 import 'package:provider/provider.dart';
 import './modules/categoryPage/categoryPage.dart';
-import './modules/categoryPage/filterByCategoryPage/filteredByCategoryPage.dart';
+import './modules/bookmarkPage/bookmarkPage.dart';
+import './modules/userPage/userPage.dart';
+import './modules/userPage/loginPage/loginPage.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -15,9 +13,30 @@ void main() {
         ChangeNotifierProvider(create: (_) => Controller()),
       ],
       child: MaterialApp(
-          theme: ThemeData.dark(),
+          debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.dark,
-          darkTheme: ThemeData.dark(),
+          theme: ThemeData(
+            // primarySwatch: Colors.lightBlueAccent!,
+            primaryColor: Colors.blue[300],
+            backgroundColor: Colors.blue[100],
+
+            brightness: Brightness.light,
+            fontFamily: 'Karla',
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          darkTheme: ThemeData(
+            appBarTheme:
+                AppBarTheme(elevation: 0, backgroundColor: Colors.transparent),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                elevation: 0, backgroundColor: Colors.transparent),
+            primarySwatch: Colors.amber,
+            primaryColor: Colors.black87,
+            drawerTheme: DrawerThemeData(backgroundColor: Colors.black54),
+            brightness: Brightness.dark,
+            backgroundColor: Color.fromRGBO(17, 24, 39, 1),
+            fontFamily: 'Karla',
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
           home: MyApp())));
 }
 
@@ -28,12 +47,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var temp;
-  var currentPageIndex = 1;
+  var currentPageIndex = 0;
+  var isLogin = false;
 
   @override
   Widget build(BuildContext context) {
+    temp == null ? temp = HomePage() : 1;
     return Scaffold(
       appBar: AppBar(
+        //shadowColor: Colors.transparent,
+        elevation: 0,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         //leading: Image.asset('assets/main_logo.png'), //Main logo
         title: const Text(
           "Cheese Movie",
@@ -44,9 +68,15 @@ class _MyAppState extends State<MyApp> {
         ],
       ),
       body: temp,
+      backgroundColor: Theme.of(context).backgroundColor,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.abc), label: "Feed"),
+          BottomNavigationBarItem(
+              backgroundColor: Colors.transparent,
+              icon: Icon(Icons.abc),
+              label: "Feed"),
           BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Category"),
           BottomNavigationBarItem(
               icon: Icon(Icons.bookmark), label: "Bookmark"),
@@ -62,16 +92,29 @@ class _MyAppState extends State<MyApp> {
           switch (index) {
             case 0:
               setState(() {
-                temp = FilteredByCategoryPage();
+                temp = HomePage();
               });
               break;
             case 1:
               setState(() {
                 temp = CategoryPage();
               });
+              break;
+            case 2:
+              setState(() {
+                temp = BookmarkPage();
+              });
+              break;
+            case 3:
+              if (!isLogin)
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return LoginPage();
+                }));
+              else
+                setState(() {
+                  temp = UserPage();
+                });
               ;
-            // case 2:;
-            // case 2:;
           }
         },
       ),

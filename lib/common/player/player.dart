@@ -2,18 +2,25 @@ import 'package:flutter/material.dart';
 import '../../providers/const.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
+import '../../../providers/controller.dart';
+import 'package:provider/provider.dart';
 
 class Player extends StatefulWidget {
-  const Player({Key? key}) : super(key: key);
+  var link_m3u8;
+  Player(this.link_m3u8, {Key? key}) : super(key: key);
 
   @override
-  State<Player> createState() => _PlayerState();
+  State<Player> createState() => _PlayerState(link_m3u8);
 }
 
 class _PlayerState extends State<Player> {
-  final videoPlayerController = VideoPlayerController.network(
-      'https://kd.hd-bophim.com/20220811/19954_dcb9681b/index.m3u8');
+  late var link_m3u8;
+  late var videoPlayerController;
   late ChewieController chewieController;
+
+  _PlayerState(this.link_m3u8) {
+    videoPlayerController = VideoPlayerController.network(this.link_m3u8);
+  }
 
   @override
   void initState() {
@@ -29,9 +36,31 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
+    var temp = context.select<Controller, String?>((e) => e.currentLink_m3u8);
+    var temp2 = link_m3u8;
+    temp == null
+        ? 1
+        : changeEpisode(temp2)
+            ? temp2 = temp
+            : 1;
+
     return Container(
       height: Const.screenWidth / 3 * 2,
       child: Chewie(controller: chewieController),
     );
+  }
+
+  bool changeEpisode(String newLink) {
+    setState(() {
+      link_m3u8 = newLink;
+      videoPlayerController = VideoPlayerController.network(newLink);
+      chewieController = ChewieController(
+        videoPlayerController: videoPlayerController,
+        aspectRatio: 3 / 2,
+        autoPlay: true,
+        looping: true,
+      );
+    });
+    return true;
   }
 }

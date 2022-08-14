@@ -47,7 +47,7 @@ class _CategoryPageState extends State<CategoryPage> {
     'khoa-hoc',
     'kinh-di',
     'am-nhac',
-    'than-hoai',
+    'than-thoai',
     'tai-lieu',
     'gia-dinh',
     'chinh-kich',
