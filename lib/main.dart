@@ -7,6 +7,7 @@ import './modules/bookmarkPage/bookmarkPage.dart';
 import './modules/userPage/userPage.dart';
 import './modules/userPage/loginPage/loginPage.dart';
 
+
 void main() {
   runApp(MultiProvider(
       providers: [
@@ -58,7 +59,7 @@ class _MyAppState extends State<MyApp> {
         //shadowColor: Colors.transparent,
         elevation: 0,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        //leading: Image.asset('assets/main_logo.png'), //Main logo
+        leading: Image.asset('assets/images/main_logo.png'), //Main logo
         title: const Text(
           "Cheese Movie",
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -75,7 +76,7 @@ class _MyAppState extends State<MyApp> {
         items: const [
           BottomNavigationBarItem(
               backgroundColor: Colors.transparent,
-              icon: Icon(Icons.abc),
+              icon: Icon(Icons.home_rounded),
               label: "Feed"),
           BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Category"),
           BottomNavigationBarItem(

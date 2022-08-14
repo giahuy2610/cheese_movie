@@ -58,7 +58,7 @@ class Movie {
         tempMovie['_id'],
         tempMovie['name'],
         tempMovie['origin_name'],
-        tempMovie['content'],
+        tempMovie['content'].substring(3, tempMovie['content'].length - 4),
         tempMovie['type'],
         tempMovie['status'],
         tempMovie['thumb_url'],
@@ -67,10 +67,18 @@ class Movie {
         tempMovie['episode_total'],
         tempMovie['slug'],
         tempMovie['year'],
-        tempMovie['actor'],
-        tempMovie['director'],
-        tempMovie['category'],
-        tempMovie['country'],
+        tempMovie['actor']
+            .toString()
+            .substring(1, tempMovie['actor'].toString().length - 1),
+        tempMovie['director']
+            .toString()
+            .substring(1, tempMovie['director'].toString().length - 1),
+        tempMovie['category']
+            .toString()
+            .substring(1, tempMovie['category'].toString().length - 1),
+        tempMovie['country']
+            .toString()
+            .substring(1, tempMovie['country'].toString().length - 1),
         tempMovie['poster_url'],
         tempListOfEpisodes);
   }

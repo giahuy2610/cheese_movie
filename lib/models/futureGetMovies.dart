@@ -8,8 +8,6 @@ Future<Movie> FutureGetMovies(String slug) async {
   final response = await http.get(Uri.parse('https://ophim1.com/phim/${slug}'));
   print('https://ophim1.com/phim/${slug}');
   if (response.statusCode == 200) {
-    print('hehe ');
-    print(jsonDecode(response.body));
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return Movie.fetchJsonGetMovies(jsonDecode(response.body));

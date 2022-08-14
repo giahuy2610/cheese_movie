@@ -42,8 +42,7 @@ class _RecentScrollViewState extends State<RecentScrollView> {
                     Expanded(
                         child: PageView(
                       controller:
-                          PageController(initialPage: 0, viewportFraction: 0.8)
-,
+                          PageController(initialPage: 0, viewportFraction: 0.8),
                       children: [
                         for (String e in slugList)
                           FutureBuilder<Movie>(

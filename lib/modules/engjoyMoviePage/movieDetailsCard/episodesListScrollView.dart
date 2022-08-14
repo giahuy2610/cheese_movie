@@ -36,8 +36,8 @@ class _EpisodesListScrollViewState extends State<EpisodesListScrollView> {
                     end: Alignment.topLeft,
                     colors: i == currentEpisode
                         ? [
-                            Colors.yellow.withOpacity(0.15),
-                            Color(0xFFFFFFFF).withOpacity(0.08),
+                            Colors.yellow.withOpacity(0.8),
+                            Colors.yellowAccent.withOpacity(0.5),
                           ]
                         : [
                             Color(0xFFffffff).withOpacity(0.15),

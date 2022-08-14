@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './episodesListScrollView.dart';
+import './actionsList.dart';
 
 class MovieDetailsCard extends StatelessWidget {
   final movie;
@@ -18,19 +19,29 @@ class MovieDetailsCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(movie.originName + '-' + movie.name,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Text(movie.originName + ' - ' + movie.name,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, height: 1.4)),
+
             Text(
               'Diễn viên: ${movie.actors.toString()}',
+              style: TextStyle(height: 1.4),
             ),
-            Text('Đạo diễn: ${movie.directors.toString()}'),
+            Text(
+              'Đạo diễn: ${movie.directors.toString()}',
+              style: TextStyle(height: 1.4),
+            ),
             Text(
               'Thời lượng: ${movie.time}',
+              style: TextStyle(height: 1.4),
             )
           ],
         ),
+        ActionsList(),
         EpisodesListScrollView(movie.episodes),
-        Text('Nội dung: ${movie.content}'),
+        Text(
+          'Nội dung: \n${movie.content}',
+          style: TextStyle(height: 1.4),
+        ),
         Row(
           children: [Text('Buy ticket')],
         )
