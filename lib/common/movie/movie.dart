@@ -48,12 +48,11 @@ class Movie {
     var tempEpisodes = json['episodes'][0]['server_data'];
 
     List<Episode> tempListOfEpisodes = List<Episode>.empty(growable: true);
-    print(tempListOfEpisodes.length);
     for (final episode in tempEpisodes) {
       tempListOfEpisodes.add(Episode(episode['name'], episode['slug'],
           episode['filename'], episode['link_m3u8']));
     }
-    print('1huyb' + tempMovie['_id']);
+    print('id' + tempMovie['_id']);
     return Movie(
         tempMovie['_id'],
         tempMovie['name'],

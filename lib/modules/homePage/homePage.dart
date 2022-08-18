@@ -4,7 +4,6 @@ import './continuteWatchingScrollView/continuteWatchingScrollView.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/rendering.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -26,10 +25,6 @@ class _HomePageState extends State<HomePage>
     return CustomRefreshIndicator(
       offsetToArmed: _indicatorSize,
       onRefresh: () => Future.delayed(const Duration(seconds: 2)),
-      child: Container(
-          child: ListView(
-        children: [RecentScrollView(), ContinuteWatchingScrollView()],
-      )),
       completeStateDuration: const Duration(seconds: 2),
       onStateChanged: (change) {
         /// set [_renderCompleteState] to true when controller.state become completed
@@ -76,6 +71,12 @@ class _HomePageState extends State<HomePage>
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 150),
                       alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: _renderCompleteState
+                            ? Colors.greenAccent.shade100
+                            : Colors.black,
+                        shape: BoxShape.circle,
+                      ),
                       child: _renderCompleteState
                           ? Image.asset('assets/images/main_logo.png')
                           : SizedBox(
@@ -91,12 +92,6 @@ class _HomePageState extends State<HomePage>
                                         : null,
                               ),
                             ),
-                      decoration: BoxDecoration(
-                        color: _renderCompleteState
-                            ? Colors.greenAccent.shade100
-                            : Colors.black,
-                        shape: BoxShape.circle,
-                      ),
                     ),
                   ),
                 );
@@ -114,6 +109,10 @@ class _HomePageState extends State<HomePage>
           ],
         );
       },
+      child: Container(
+          child: ListView(
+        children: const [RecentScrollView(), ContinuteWatchingScrollView()],
+      )),
     );
   }
 

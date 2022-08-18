@@ -20,8 +20,8 @@ class MovieDetailsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(movie.originName + ' - ' + movie.name,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, height: 1.4)),
-
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 22, height: 1.4)),
             Text(
               'Diễn viên: ${movie.actors.toString()}',
               style: TextStyle(height: 1.4),

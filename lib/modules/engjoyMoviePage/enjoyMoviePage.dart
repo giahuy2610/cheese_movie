@@ -4,6 +4,7 @@ import '../../providers/const.dart';
 import '../../common/player/player.dart';
 import '../../../providers/controller.dart';
 import 'package:provider/provider.dart';
+import '../../models/addToBookmark.dart';
 
 class EnjoyMoviePage extends StatelessWidget {
   final movie;
@@ -18,7 +19,15 @@ class EnjoyMoviePage extends StatelessWidget {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         leading: BackButton(),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.bookmark_add_outlined))
+          context
+                  .select<Controller, List<String>>((e) => e.bookmarkSlug)
+                  .contains(movie.slug)
+              ? IconButton(onPressed: () {}, icon: Icon(Icons.bookmark_remove))
+              : IconButton(
+                  onPressed: () {
+                    AddToBookmark(movie.slug, '1');
+                  },
+                  icon: Icon(Icons.bookmark_add_outlined))
         ],
       ),
       body: Column(children: [

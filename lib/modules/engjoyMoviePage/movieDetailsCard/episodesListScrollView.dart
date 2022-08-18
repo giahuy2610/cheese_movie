@@ -76,7 +76,9 @@ class _EpisodesListScrollViewState extends State<EpisodesListScrollView> {
                     child: Container(
                       constraints: BoxConstraints.expand(),
                       alignment: Alignment.center,
-                      child: Text('Tập ${episodes[i - 1].name}'),
+                      child: episodes[0].name == ''
+                          ? Text('Sắp ra mắt')
+                          : Text('Tập ${episodes[i - 1].name}'),
                     )),
               )
           ],

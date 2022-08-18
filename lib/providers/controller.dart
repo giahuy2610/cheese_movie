@@ -6,6 +6,12 @@ class Controller extends ChangeNotifier {
   var currentMovie;
   var currentEpisode;
   var currentLink_m3u8;
+  List<String> bookmarkSlug = List<String>.empty(growable: true);
+
+  void setBookmarkSlug(List<String> newBookmark) {
+    bookmarkSlug = newBookmark;
+    notifyListeners();
+  }
 
   void setDarkMode(bool value) {
     isDarkMode = value;

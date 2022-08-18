@@ -1,7 +1,4 @@
 //the Playlist class storing the list of movies which matched with the client's movie filter
-import '../movie/movie.dart';
-import '../../models/futureGetMovies.dart';
-
 class Playlist {
   late final listOfMovies;
   Playlist(this.listOfMovies);

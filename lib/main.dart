@@ -6,7 +6,10 @@ import './modules/categoryPage/categoryPage.dart';
 import './modules/bookmarkPage/bookmarkPage.dart';
 import './modules/userPage/userPage.dart';
 import './modules/userPage/loginPage/loginPage.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -51,8 +54,30 @@ class _MyAppState extends State<MyApp> {
   var currentPageIndex = 0;
   var isLogin = false;
 
+  Future<void> initializeDefault() async {
+    FirebaseApp app = await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    DatabaseReference ref = FirebaseDatabase.instance.ref();
+    final snapshot = await ref
+        .child('users/${FirebaseAuth.instance.currentUser?.uid}')
+        .get();
+
+    if (snapshot.exists) {
+      List<String> tempListOfMovies = List<String>.empty(growable: true);
+      snapshot.children.forEach((element) {
+        tempListOfMovies.add(element.children.first.key.toString());
+      });
+
+      context.read<Controller>().setBookmarkSlug(tempListOfMovies);
+    }
+
+    print('Initialized default app $app');
+  }
+
   @override
   Widget build(BuildContext context) {
+    initializeDefault();
     temp == null ? temp = HomePage() : 1;
     return Scaffold(
       appBar: AppBar(

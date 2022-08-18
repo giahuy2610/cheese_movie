@@ -8,13 +8,13 @@ class AlternativeWay extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Text('or log in with'),
+          Text('OR'),
           Row(
             children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.facebook)),
-              IconButton(
-                  onPressed: () {}, icon: Icon(Icons.g_mobiledata_outlined)),
-              IconButton(onPressed: () {}, icon: Icon(Icons.bike_scooter))
+              Container(
+
+              ),
+              Container()
             ],
           )
         ],

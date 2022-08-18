@@ -29,7 +29,7 @@ class _PlayerState extends State<Player> {
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
       aspectRatio: 3 / 2,
-      autoPlay: true,
+      autoPlay: false,
       looping: true,
     );
   }

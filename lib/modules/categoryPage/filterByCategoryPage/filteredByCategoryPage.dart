@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../providers/const.dart';
-import '../../../common/player/player.dart';
-import '.././categoryButton.dart';
 import './movieFilteredByCategoryCard.dart';
 import '../../../models/futureGetMoviesByCategory.dart';
 import '../../../models/futureGetMovies.dart';
 import '../../../common/movie/movie.dart';
 import '../../../common/movie/playlist.dart';
-import './movieFilteredByCategoryCard.dart';
-import 'package:skeletons/skeletons.dart';
 
 class FilteredByCategoryPage extends StatefulWidget {
   final category;
@@ -16,7 +12,8 @@ class FilteredByCategoryPage extends StatefulWidget {
   FilteredByCategoryPage(this.category, this.path);
 
   @override
-  State<FilteredByCategoryPage> createState() => _FilteredByCategoryPageState(this.category, this.path);
+  State<FilteredByCategoryPage> createState() =>
+      _FilteredByCategoryPageState(this.category, this.path);
 }
 
 class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
@@ -48,32 +45,32 @@ class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       List<String> slugList =
-                      snapshot.data?.listOfMovies as List<String>;
+                          snapshot.data?.listOfMovies as List<String>;
                       return Container(
                         constraints:
-                        BoxConstraints(maxHeight: Const.screenHeight),
+                            BoxConstraints(maxHeight: Const.screenHeight),
                         child: Column(children: [
                           Expanded(
                               child: ListView(children: [
-                                Wrap(
-                                  alignment: WrapAlignment.center,
-                                  children: [
-                                    for (String e in slugList)
-                                      FutureBuilder<Movie>(
-                                        future: FutureGetMovies(e),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.hasData) {
-                                            return MovieFilteredByCategoryCard(
-                                                snapshot.data);
-                                          } else if (snapshot.hasError)
-                                            return Text('${snapshot.error}');
-                                          else
-                                            return Container();
-                                        },
-                                      ),
-                                  ],
-                                )
-                              ]))
+                            Wrap(
+                              alignment: WrapAlignment.center,
+                              children: [
+                                for (String e in slugList)
+                                  FutureBuilder<Movie>(
+                                    future: FutureGetMovies(e),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return MovieFilteredByCategoryCard(
+                                            snapshot.data);
+                                      } else if (snapshot.hasError)
+                                        return Text('${snapshot.error}');
+                                      else
+                                        return Container();
+                                    },
+                                  ),
+                              ],
+                            )
+                          ]))
                         ]),
                       );
                     } else if (snapshot.hasError) {
@@ -86,6 +83,3 @@ class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
         ));
   }
 }
-
-
-

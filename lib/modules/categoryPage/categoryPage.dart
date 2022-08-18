@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../providers/const.dart';
-import '../../common/player/player.dart';
 import './categoryButton.dart';
 
 class CategoryPage extends StatefulWidget {
