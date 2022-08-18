@@ -66,6 +66,7 @@ class _EpisodesListScrollViewState extends State<EpisodesListScrollView> {
                 child: InkWell(
                     borderRadius: BorderRadius.circular(20),
                     onTap: () {
+
                       context
                           .read<Controller>()
                           .changeLink_m3u8(episodes[i - 1].link_m3u8);

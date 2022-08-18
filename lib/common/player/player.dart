@@ -26,41 +26,23 @@ class _PlayerState extends State<Player> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    chewieController = ChewieController(
-      videoPlayerController: videoPlayerController,
-      aspectRatio: 3 / 2,
-      autoPlay: false,
-      looping: true,
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     var temp = context.select<Controller, String?>((e) => e.currentLink_m3u8);
     var temp2 = link_m3u8;
-    temp == null
-        ? 1
-        : changeEpisode(temp2)
-            ? temp2 = temp
-            : 1;
+    temp == null ? 1 : temp2 = temp;
 
     return Container(
       height: Const.screenWidth / 3 * 2,
-      child: Chewie(controller: chewieController),
-    );
-  }
-
-  bool changeEpisode(String newLink) {
-    setState(() {
-      link_m3u8 = newLink;
-      videoPlayerController = VideoPlayerController.network(newLink);
-      chewieController = ChewieController(
-        videoPlayerController: videoPlayerController,
+      child: Chewie(
+          controller: ChewieController(
+        videoPlayerController: VideoPlayerController.network(temp2),
         aspectRatio: 3 / 2,
         autoPlay: true,
-        looping: true,
-      );
-    });
-    return true;
+        looping: false,
+      )),
+    );
   }
 }

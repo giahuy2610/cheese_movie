@@ -32,6 +32,7 @@ class Controller extends ChangeNotifier {
   }
 
   void changeLink_m3u8(String newLink) {
+    print('change to $newLink');
     currentLink_m3u8 = newLink;
     notifyListeners();
   }
