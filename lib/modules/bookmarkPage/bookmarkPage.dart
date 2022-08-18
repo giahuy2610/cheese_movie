@@ -11,8 +11,8 @@ class BookmarkPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
+        alignment: Alignment.center,
         child: FutureBuilder<Playlist>(
             future: FutureGetBookmark(),
             builder: (context, snapshot) {
@@ -46,7 +46,10 @@ class BookmarkPage extends StatelessWidget {
                   ]),
                 );
               } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
+                return Container(
+                  color: Colors.pink,
+                  child: Text("Don't have any favorite movie"),
+                );
               }
               return Container();
             }));

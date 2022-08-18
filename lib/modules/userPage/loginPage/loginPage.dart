@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                         // Child text spans will inherit styles from parent
                         style: TextStyle(),
                         children: <TextSpan>[
-                          TextSpan(text: "Dont't have an acoount? "),
+                          TextSpan(text: "Don't have an acoount? "),
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {

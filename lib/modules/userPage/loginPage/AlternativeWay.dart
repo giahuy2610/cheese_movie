@@ -10,12 +10,7 @@ class AlternativeWay extends StatelessWidget {
         children: [
           Text('OR'),
           Row(
-            children: [
-              Container(
-
-              ),
-              Container()
-            ],
+            children: [Container(), Container()],
           )
         ],
       ),

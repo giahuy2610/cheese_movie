@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import './common/customSearchDelegate/customSearchDelegate.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -90,7 +91,12 @@ class _MyAppState extends State<MyApp> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => CustomSearchDelegate()));
+              },
+              icon: Icon(Icons.search_rounded))
         ],
       ),
       body: temp,

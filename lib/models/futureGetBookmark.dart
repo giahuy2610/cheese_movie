@@ -4,7 +4,6 @@ import 'package:cheese_movie/common/movie/playlist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-
 Future<Playlist> FutureGetBookmark() async {
   final ref = FirebaseDatabase.instance.ref();
 
