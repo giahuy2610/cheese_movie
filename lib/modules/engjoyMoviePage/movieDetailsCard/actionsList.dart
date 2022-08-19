@@ -153,9 +153,8 @@ class ActionsList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     child: Icon(Icons.share),
                     onTap: () {
-                      CreateSharingDynamicLink(slug).then((value) => Share.share(value));
-
-
+                      CreateSharingDynamicLink(slug)
+                          .then((value) => Share.share(value));
                     },
                   ))),
           GlassmorphicContainer(

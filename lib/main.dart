@@ -74,7 +74,6 @@ class _MyAppState extends State<MyApp> {
 
       context.read<Controller>().setBookmarkSlug(tempListOfMovies);
     }
-
   }
 
   @override

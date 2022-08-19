@@ -55,19 +55,3 @@ class BookmarkPage extends StatelessWidget {
             }));
   }
 }
-
-// void test() async {
-//   final ref = FirebaseDatabase.instance.ref();
-//
-//   final snapshot = await ref.child('users/${FirebaseAuth.instance.currentUser?.uid}').get();
-//
-//
-//   print(1);
-//   if (snapshot.exists) {
-//     snapshot.children.forEach((element) {
-//       print(element.key);
-//     });
-//   } else {
-//     print('No data available.');
-//   }
-// }
