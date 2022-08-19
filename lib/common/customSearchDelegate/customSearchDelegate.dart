@@ -55,46 +55,48 @@ class _CustomSearchDelegateState extends State<CustomSearchDelegate> {
           ),
         ),
       )),
-      body: keyword == '' ? Container() : Container(
-          child: FutureBuilder<Playlist>(
-              future: FutureGetMoviesBySearch(keyword),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<String> slugList =
-                      snapshot.data?.listOfMovies as List<String>;
+      body: keyword == ''
+          ? Container()
+          : Container(
+              child: FutureBuilder<Playlist>(
+                  future: FutureGetMoviesBySearch(keyword),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<String> slugList =
+                          snapshot.data?.listOfMovies as List<String>;
                       for (var item in slugList)
-                  return Container(
-                    constraints:
-                    BoxConstraints(maxHeight: Const.screenHeight),
-                    child: Column(children: [
-                      Expanded(
-                          child: ListView(children: [
-                            Wrap(
-                              alignment: WrapAlignment.center,
-                              children: [
-                                for (String e in slugList)
-                                  FutureBuilder<Movie>(
-                                    future: FutureGetMovies(e),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return MovieFilteredByCategoryCard(
-                                            snapshot.data);
-                                      } else if (snapshot.hasError)
-                                        return Text('${snapshot.error}');
-                                      else
-                                        return Container();
-                                    },
-                                  ),
-                              ],
-                            )
-                          ]))
-                    ]),
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return Container();
-              })),
+                        return Container(
+                          constraints:
+                              BoxConstraints(maxHeight: Const.screenHeight),
+                          child: Column(children: [
+                            Expanded(
+                                child: ListView(children: [
+                              Wrap(
+                                //alignment: WrapAlignment.center,
+                                children: [
+                                  for (String e in slugList)
+                                    FutureBuilder<Movie>(
+                                      future: FutureGetMovies(e),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return MovieFilteredByCategoryCard(
+                                              snapshot.data);
+                                        } else if (snapshot.hasError)
+                                          return Text('${snapshot.error}');
+                                        else
+                                          return Container();
+                                      },
+                                    ),
+                                ],
+                              )
+                            ]))
+                          ]),
+                        );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return Container();
+                  })),
     );
   }
 }

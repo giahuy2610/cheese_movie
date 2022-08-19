@@ -1,3 +1,4 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import './modules/homePage/homePage.dart';
 import './providers/controller.dart';
@@ -12,7 +13,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import './common/customSearchDelegate/customSearchDelegate.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Controller()),
@@ -30,15 +34,15 @@ void main() {
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           darkTheme: ThemeData(
-            appBarTheme:
-                AppBarTheme(elevation: 0, backgroundColor: Colors.transparent),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            appBarTheme: const AppBarTheme(
+                elevation: 0, backgroundColor: Colors.transparent),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                 elevation: 0, backgroundColor: Colors.transparent),
             primarySwatch: Colors.amber,
             primaryColor: Colors.black87,
-            drawerTheme: DrawerThemeData(backgroundColor: Colors.black54),
+            drawerTheme: const DrawerThemeData(backgroundColor: Colors.black54),
             brightness: Brightness.dark,
-            backgroundColor: Color.fromRGBO(17, 24, 39, 1),
+            backgroundColor: const Color.fromRGBO(17, 24, 39, 1),
             fontFamily: 'Karla',
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
@@ -93,8 +97,8 @@ class _MyAppState extends State<MyApp> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => CustomSearchDelegate()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => CustomSearchDelegate()));
               },
               icon: Icon(Icons.search_rounded))
         ],

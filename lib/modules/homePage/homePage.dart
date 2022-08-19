@@ -1,8 +1,11 @@
 import 'package:cheese_movie/modules/homePage/recentScrollView/recentScrollView.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import '../categoryPage/filterByCategoryPage/filteredByCategoryPage.dart';
 import './continuteWatchingScrollView/continuteWatchingScrollView.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/rendering.dart';
+import '../engjoyMoviePage/enjoyMoviePage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +22,49 @@ class _HomePageState extends State<HomePage>
   bool _renderCompleteState = false;
 
   ScrollDirection prevScrollDirection = ScrollDirection.idle;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    initDynamicLinks();
+    super.initState();
+  }
+
+  void initDynamicLinks() async {
+    final PendingDynamicLinkData? data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri? deepLink = data?.link;
+
+    if (deepLink != null) {
+      handleDynamicLink(deepLink);
+    }
+
+    FirebaseDynamicLinks.instance.onLink.listen(
+        (PendingDynamicLinkData dynamicLink) {
+      final Uri? deepLink = dynamicLink?.link;
+      if (deepLink != null) {
+        // Hàm này để xử lý khi có Dynamic link gọi tới.
+        handleDynamicLink(deepLink);
+      }
+    }, onError: (Error e) async {
+      //Hàm này sẽ xuất ra lỗi nếu link có vấn đề.
+      print(e);
+    });
+  }
+
+  // Ở đây nếu link có chứa "post" thì sẽ cho nhảy đến màn hình Post và truyền param thứ 2 của link là 56 qua màn hình Post.
+  void handleDynamicLink(Uri url) {
+    List<String> separatedString = [];
+    separatedString.addAll(url.path.split('/'));
+    if (separatedString[1] == "welcome-huy") {
+      print('welcome to my app');
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  FilteredByCategoryPage('Hanh dong', 'hanh-dong')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,12 +161,4 @@ class _HomePageState extends State<HomePage>
       )),
     );
   }
-
-  // @override
-  // // Widget build(BuildContext context) {
-  // //   return Container(
-  // //       child: ListView(
-  // //     children: [RecentScrollView(), ContinuteWatchingScrollView()],
-  // //   ));
-  // // }
 }

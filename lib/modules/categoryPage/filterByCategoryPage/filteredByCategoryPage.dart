@@ -5,6 +5,7 @@ import '../../../models/futureGetMoviesByCategory.dart';
 import '../../../models/futureGetMovies.dart';
 import '../../../common/movie/movie.dart';
 import '../../../common/movie/playlist.dart';
+import '../../../common/customSearchDelegate/customSearchDelegate.dart';
 
 class FilteredByCategoryPage extends StatefulWidget {
   final category;
@@ -31,11 +32,16 @@ class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           leading: BackButton(),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => CustomSearchDelegate()));
+                },
+                icon: Icon(Icons.search_rounded))
           ],
         ),
         body: Container(
-          padding: EdgeInsets.all(20),
+          //padding: EdgeInsets.all(20),
           width: Const.screenWidth,
           height: Const.screenHeight,
           child: ListView(
