@@ -1,8 +1,13 @@
 import 'package:cheese_movie/modules/homePage/recentScrollView/recentScrollView.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import '../../common/movie/movie.dart';
+import '../categoryPage/filterByCategoryPage/filteredByCategoryPage.dart';
 import './continuteWatchingScrollView/continuteWatchingScrollView.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/rendering.dart';
+import '../engjoyMoviePage/enjoyMoviePage.dart';
+import '../../models/futureGetMovies.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +24,40 @@ class _HomePageState extends State<HomePage>
   bool _renderCompleteState = false;
 
   ScrollDirection prevScrollDirection = ScrollDirection.idle;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    initDynamicLinks();
+    super.initState();
+  }
+
+  void initDynamicLinks() async {
+    print('haaaaaaaaaaaaaaaaaaa');
+    final PendingDynamicLinkData? data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri? deepLink = data?.link;
+
+    if (deepLink != null) {
+      handleDynamicLink(deepLink);
+    }
+
+    FirebaseDynamicLinks.instance.onLink.listen(
+        (PendingDynamicLinkData dynamicLink) {
+      final Uri deepLink = dynamicLink.link;
+      handleDynamicLink(deepLink);
+    }, onError: (e) {
+      print(e);
+    });
+  }
+
+  // Ở đây nếu link có chứa "post" thì sẽ cho nhảy đến màn hình Post và truyền param thứ 2 của link là 56 qua màn hình Post.
+  void handleDynamicLink(Uri url) {
+    List<String> separatedString = [];
+    separatedString.addAll(url.path.split('/'));
+    FutureGetMovies(separatedString[1]).then((value) => Navigator.push(context,
+        MaterialPageRoute(builder: (context) => EnjoyMoviePage(value))));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,12 +154,4 @@ class _HomePageState extends State<HomePage>
       )),
     );
   }
-
-  // @override
-  // // Widget build(BuildContext context) {
-  // //   return Container(
-  // //       child: ListView(
-  // //     children: [RecentScrollView(), ContinuteWatchingScrollView()],
-  // //   ));
-  // // }
 }

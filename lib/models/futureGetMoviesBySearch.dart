@@ -10,7 +10,8 @@ Future<Playlist> FutureGetMoviesBySearch(String key) async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print('https://ophim.cc/_next/data/jMo1r8lC0F6IGwkz0ayh-/tim-kiem.json?keyword=$key');
+    print(
+        'https://ophim.cc/_next/data/jMo1r8lC0F6IGwkz0ayh-/tim-kiem.json?keyword=$key');
     return Playlist.fetchJsonGetMoviesByCategory(jsonDecode(response.body));
   } else {
     // If the server did not return a 200 OK response,

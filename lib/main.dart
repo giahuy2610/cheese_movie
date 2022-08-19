@@ -12,7 +12,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import './common/customSearchDelegate/customSearchDelegate.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Controller()),
@@ -30,15 +35,15 @@ void main() {
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           darkTheme: ThemeData(
-            appBarTheme:
-                AppBarTheme(elevation: 0, backgroundColor: Colors.transparent),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            appBarTheme: const AppBarTheme(
+                elevation: 0, backgroundColor: Colors.transparent),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                 elevation: 0, backgroundColor: Colors.transparent),
             primarySwatch: Colors.amber,
             primaryColor: Colors.black87,
-            drawerTheme: DrawerThemeData(backgroundColor: Colors.black54),
+            drawerTheme: const DrawerThemeData(backgroundColor: Colors.black54),
             brightness: Brightness.dark,
-            backgroundColor: Color.fromRGBO(17, 24, 39, 1),
+            backgroundColor: const Color.fromRGBO(17, 24, 39, 1),
             fontFamily: 'Karla',
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
@@ -56,9 +61,6 @@ class _MyAppState extends State<MyApp> {
   var isLogin = false;
 
   Future<void> initializeDefault() async {
-    FirebaseApp app = await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
     DatabaseReference ref = FirebaseDatabase.instance.ref();
     final snapshot = await ref
         .child('users/${FirebaseAuth.instance.currentUser?.uid}')
@@ -73,7 +75,6 @@ class _MyAppState extends State<MyApp> {
       context.read<Controller>().setBookmarkSlug(tempListOfMovies);
     }
 
-    print('Initialized default app $app');
   }
 
   @override
@@ -93,8 +94,8 @@ class _MyAppState extends State<MyApp> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => CustomSearchDelegate()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => CustomSearchDelegate()));
               },
               icon: Icon(Icons.search_rounded))
         ],

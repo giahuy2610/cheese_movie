@@ -14,6 +14,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final myControllerEmailTextField = TextEditingController();
   final myControllerPasswordTextField = TextEditingController();
+  final myControllerConfirmPasswordTextField = TextEditingController();
   var isRegister = false;
 
   @override
@@ -89,7 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                               children: [
                                 const Text('Confirm Password'),
                                 TextFormField(
-                                    controller: myControllerPasswordTextField)
+                                    controller:
+                                        myControllerConfirmPasswordTextField)
                               ],
                             ),
                           )

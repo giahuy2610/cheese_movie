@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+import '../../../models/createSharingDyamicLink.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ActionsList extends StatelessWidget {
-  const ActionsList({Key? key}) : super(key: key);
+  var slug;
+  ActionsList(this.slug);
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +152,11 @@ class ActionsList extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(20),
                     child: Icon(Icons.share),
-                    onTap: () {},
+                    onTap: () {
+                      CreateSharingDynamicLink(slug).then((value) => Share.share(value));
+
+
+                    },
                   ))),
           GlassmorphicContainer(
               width: 40,

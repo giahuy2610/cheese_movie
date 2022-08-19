@@ -17,9 +17,9 @@ class MovieFilteredByCategoryCard extends StatelessWidget {
               }));
             },
             child: Container(
-              width: Const.screenWidth * 0.35,
+              width: Const.screenWidth * 0.5,
               height: 200,
-              constraints: BoxConstraints(maxWidth: Const.screenWidth * 0.35),
+              constraints: BoxConstraints(maxWidth: Const.screenWidth * 0.44),
               child: Column(
                 children: [
                   Expanded(

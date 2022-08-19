@@ -36,7 +36,7 @@ class MovieDetailsCard extends StatelessWidget {
             )
           ],
         ),
-        ActionsList(),
+        ActionsList(movie.slug),
         EpisodesListScrollView(movie.episodes),
         Text(
           'Nội dung: \n${movie.content}',
