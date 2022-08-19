@@ -1,11 +1,13 @@
 import 'package:cheese_movie/modules/homePage/recentScrollView/recentScrollView.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import '../../common/movie/movie.dart';
 import '../categoryPage/filterByCategoryPage/filteredByCategoryPage.dart';
 import './continuteWatchingScrollView/continuteWatchingScrollView.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/rendering.dart';
 import '../engjoyMoviePage/enjoyMoviePage.dart';
+import '../../models/futureGetMovies.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,6 +33,7 @@ class _HomePageState extends State<HomePage>
   }
 
   void initDynamicLinks() async {
+    print('haaaaaaaaaaaaaaaaaaa');
     final PendingDynamicLinkData? data =
         await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri? deepLink = data?.link;
@@ -41,13 +44,9 @@ class _HomePageState extends State<HomePage>
 
     FirebaseDynamicLinks.instance.onLink.listen(
         (PendingDynamicLinkData dynamicLink) {
-      final Uri? deepLink = dynamicLink?.link;
-      if (deepLink != null) {
-        // Hàm này để xử lý khi có Dynamic link gọi tới.
-        handleDynamicLink(deepLink);
-      }
-    }, onError: (Error e) async {
-      //Hàm này sẽ xuất ra lỗi nếu link có vấn đề.
+      final Uri deepLink = dynamicLink.link;
+      handleDynamicLink(deepLink);
+    }, onError: (e) {
       print(e);
     });
   }
@@ -56,14 +55,8 @@ class _HomePageState extends State<HomePage>
   void handleDynamicLink(Uri url) {
     List<String> separatedString = [];
     separatedString.addAll(url.path.split('/'));
-    if (separatedString[1] == "welcome-huy") {
-      print('welcome to my app');
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  FilteredByCategoryPage('Hanh dong', 'hanh-dong')));
-    }
+    FutureGetMovies(separatedString[1]).then((value) => Navigator.push(context,
+        MaterialPageRoute(builder: (context) => EnjoyMoviePage(value))));
   }
 
   @override

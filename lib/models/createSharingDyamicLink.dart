@@ -2,14 +2,13 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 Future<String> CreateSharingDynamicLink(String slug) async {
   final dynamicLinkParams = DynamicLinkParameters(
-    link: Uri.parse("https://www.example.com/"),
-    uriPrefix: "https://example.page.link",
-    androidParameters:
-        const AndroidParameters(packageName: "com.example.app.android"),
-    iosParameters: const IOSParameters(bundleId: "com.example.app.ios"),
+    link: Uri.parse("https://cheesemovie.page.link/$slug"),
+    uriPrefix: "https://cheesemovie.page.link",
+    androidParameters: const AndroidParameters(packageName: "com.example.cheese_movie"),
+    iosParameters:
+    IOSParameters(bundleId: "cheese_movie"),
   );
   final dynamicLink =
       await FirebaseDynamicLinks.instance.buildLink(dynamicLinkParams);
-
-  return 'https://cheesemovie.page.link/$slug';
+  return dynamicLink.toString();
 }

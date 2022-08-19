@@ -1,4 +1,3 @@
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import './modules/homePage/homePage.dart';
 import './providers/controller.dart';
@@ -15,7 +14,9 @@ import './common/customSearchDelegate/customSearchDelegate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(MultiProvider(
       providers: [
@@ -60,9 +61,6 @@ class _MyAppState extends State<MyApp> {
   var isLogin = false;
 
   Future<void> initializeDefault() async {
-    FirebaseApp app = await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
     DatabaseReference ref = FirebaseDatabase.instance.ref();
     final snapshot = await ref
         .child('users/${FirebaseAuth.instance.currentUser?.uid}')
@@ -77,7 +75,6 @@ class _MyAppState extends State<MyApp> {
       context.read<Controller>().setBookmarkSlug(tempListOfMovies);
     }
 
-    print('Initialized default app $app');
   }
 
   @override
