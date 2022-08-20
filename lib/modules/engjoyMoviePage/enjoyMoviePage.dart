@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'movieDetailsCard/movieDetailsCard.dart';
-import '../../providers/const.dart';
 import '../../common/player/player.dart';
 import '../../../providers/controller.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +7,11 @@ import '../../models/addToBookmark.dart';
 
 class EnjoyMoviePage extends StatelessWidget {
   final movie;
-  const EnjoyMoviePage(this.movie, {Key? key}) : super(key: key);
+  var episode;
+  var positionInSeconds;
+  EnjoyMoviePage(this.movie, {Key? key, this.episode, this.positionInSeconds})
+      : super(key: key);
+  //constructor has episode and position only if is continue playing a incomplete watching movie
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +20,22 @@ class EnjoyMoviePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        leading: BackButton(),
+        leading: const BackButton(),
         actions: [
           context
                   .select<Controller, List<String>>((e) => e.bookmarkSlug)
                   .contains(movie.slug)
-              ? IconButton(onPressed: () {}, icon: Icon(Icons.bookmark_remove))
+              ? IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.bookmark_remove))
               : IconButton(
                   onPressed: () {
                     AddToBookmark(movie.slug, '1');
                   },
-                  icon: Icon(Icons.bookmark_add_outlined))
+                  icon: const Icon(Icons.bookmark_add_outlined))
         ],
       ),
       body: Column(children: [
-        Player(movie.episodes[0].link_m3u8),
+        Player(movie),
         Expanded(child: MovieDetailsCard(movie)),
       ]),
     );
