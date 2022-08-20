@@ -7,7 +7,13 @@ class Controller extends ChangeNotifier {
   var currentMovie;
   var currentEpisode;
   var currentLink_m3u8;
+  var isChangeWatchingMovieList = 1;
   List<String> bookmarkSlug = List<String>.empty(growable: true);
+
+  void setIsChangeWatchingMovieList() {
+    isChangeWatchingMovieList++;
+    notifyListeners();
+  }
 
   void setBookmarkSlug(List<String> newBookmark) {
     bookmarkSlug = newBookmark;

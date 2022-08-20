@@ -11,6 +11,25 @@ addNewRecentMovie(slug, episode, durationInSeconds, positionInSeconds) async {
   prefs.setString('recentMovieList', newStr);
 }
 
+//delete
+deleteRecentMovie(slug) async {
+  List<RecentMovie> newList = List<RecentMovie>.empty(growable: true);
+  String newStr = '';
+  await getRecentMovieList().then((value) {
+    print('ban dau ' + value.length.toString());
+    value.removeWhere((element) => element.slug == slug);
+    print('luc sau' + value.length.toString());
+    newList = value;
+  });
+
+  newList.forEach((element) {
+    newStr += element.convertToString();
+  });
+  print(newStr);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('recentMovieList', newStr);
+}
+
 //get
 getRecentMovieListString() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

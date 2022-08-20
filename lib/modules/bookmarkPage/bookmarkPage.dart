@@ -52,8 +52,7 @@ class BookmarkPage extends StatelessWidget {
                     );
                   } else if (snapshot.hasError) {
                     return Container(
-                      color: Colors.pink,
-                      child: Text("Don't have any favorite movie"),
+                      child: Text("Bạn chưa có phim yêu thích"),
                     );
                   }
                   return Container();

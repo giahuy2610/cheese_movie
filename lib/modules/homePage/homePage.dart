@@ -1,6 +1,7 @@
 import 'package:cheese_movie/modules/homePage/recentScrollView/recentScrollView.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../common/movie/movie.dart';
 import '../categoryPage/filterByCategoryPage/filteredByCategoryPage.dart';
 import './continuteWatchingScrollView/continuteWatchingScrollView.dart';
@@ -150,7 +151,10 @@ class _HomePageState extends State<HomePage>
       },
       child: Container(
           child: ListView(
-        children: const [RecentScrollView(), ContinuteWatchingScrollView()],
+        children: [
+          RecentScrollView(),
+          ContinuteWatchingScrollView(),
+        ],
       )),
     );
   }
