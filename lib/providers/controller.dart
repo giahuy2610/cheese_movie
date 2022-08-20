@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Controller extends ChangeNotifier {
   bool isDarkMode = true;
-  bool isLogin = false;
+  bool isLogin = FirebaseAuth.instance.currentUser == null ? false : true;
   var currentMovie;
   var currentEpisode;
   var currentLink_m3u8;
@@ -18,7 +19,8 @@ class Controller extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setLogIn() {
+  void setLogIn(bool value) {
+    isLogin = value;
     notifyListeners();
   }
 

@@ -1,8 +1,8 @@
-import 'package:cheese_movie/modules/userPage/loginPage/AlternativeWay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import './inputFields.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../../models/registerNewAccount.dart';
+import '../../../models/signin.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -100,9 +100,11 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         this.isRegister
                             ? register(
+                                context,
                                 myControllerEmailTextField.value.text.trim(),
                                 myControllerPasswordTextField.value.text.trim())
                             : signIn(
+                                context,
                                 myControllerEmailTextField.value.text.trim(),
                                 myControllerPasswordTextField.value.text
                                     .trim());
@@ -152,11 +154,11 @@ class _LoginPageState extends State<LoginPage> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 setState(() {
-                                  this.isRegister = true;
+                                  isRegister = true;
                                 });
                               },
                             text: 'Register',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
                             ),
@@ -167,27 +169,5 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ));
-  }
-}
-
-void signIn(String emailAddress, String password) async {
-  try {
-    final credential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: emailAddress, password: password);
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'user-not-found') {
-      print('No user found for that email.');
-    } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
-    }
-  }
-}
-
-void register(String emailAdress, String password) async {
-  try {
-    FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: emailAdress, password: password);
-  } on FirebaseAuthException catch (e) {
-    print(e);
   }
 }

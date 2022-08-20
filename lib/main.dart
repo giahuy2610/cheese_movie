@@ -1,3 +1,4 @@
+import 'package:cheese_movie/modules/notificationPage/notificationPage.dart';
 import 'package:flutter/material.dart';
 import './modules/homePage/homePage.dart';
 import './providers/controller.dart';
@@ -17,6 +18,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
 
   runApp(MultiProvider(
       providers: [
@@ -85,7 +93,10 @@ class _MyAppState extends State<MyApp> {
         //shadowColor: Colors.transparent,
         elevation: 0,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        leading: Image.asset('assets/images/main_logo.png'), //Main logo
+        leading: Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Image.asset('assets/images/main_logo.png'),
+        ), //Main logo
         title: const Text(
           "Cheese Movie",
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -96,7 +107,14 @@ class _MyAppState extends State<MyApp> {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => CustomSearchDelegate()));
               },
-              icon: Icon(Icons.search_rounded))
+              icon: Icon(Icons.search_rounded)),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => NotificationPage()));
+            },
+            icon: Icon(Icons.notifications),
+          )
         ],
       ),
       body: temp,
@@ -138,15 +156,9 @@ class _MyAppState extends State<MyApp> {
               });
               break;
             case 3:
-              if (!isLogin)
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return LoginPage();
-                }));
-              else
-                setState(() {
-                  temp = UserPage();
-                });
-              ;
+              setState(() {
+                temp = UserPage();
+              });
           }
         },
       ),

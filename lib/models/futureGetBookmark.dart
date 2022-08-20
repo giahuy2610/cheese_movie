@@ -10,12 +10,11 @@ Future<Playlist> FutureGetBookmark() async {
   final snapshot =
       await ref.child('users/${FirebaseAuth.instance.currentUser?.uid}').get();
 
-  print(1);
   if (snapshot.exists) {
     List<String> tempListOfMovies = List<String>.empty(growable: true);
-    snapshot.children.forEach((element) {
+    for (var element in snapshot.children) {
       tempListOfMovies.add(element.children.first.key.toString());
-    });
+    }
 
     return Playlist(tempListOfMovies);
   } else {

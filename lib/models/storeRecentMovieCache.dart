@@ -37,7 +37,7 @@ Future<List<RecentMovie>> getRecentMovieList() async {
     });
   }
   print('length of watching movie list is ' + recentList.length.toString());
-  return recentList;
+  return List.from(recentList.reversed); //reverse to sort by time (lastest)
 }
 
 //parser

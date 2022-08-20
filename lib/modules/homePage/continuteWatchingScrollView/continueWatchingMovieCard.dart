@@ -7,7 +7,7 @@ import '../../engjoyMoviePage/enjoyMoviePage.dart';
 
 class ContinuteWatchingMovieCard extends StatelessWidget {
   final recentMovie;
-  ContinuteWatchingMovieCard(this.recentMovie);
+  const ContinuteWatchingMovieCard(this.recentMovie);
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,10 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                   colors: [
-                    Color(0xFFffffff).withOpacity(0.15),
-                    Color(0xFFFFFFFF).withOpacity(0.08),
+                    const Color(0xFFffffff).withOpacity(0.15),
+                    const Color(0xFFFFFFFF).withOpacity(0.08),
                   ],
-                  stops: [
+                  stops: const [
                     0.1,
                     1,
                   ]),
@@ -34,13 +34,13 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                 begin: Alignment.bottomRight,
                 end: Alignment.topLeft,
                 colors: [
-                  Color((0xFFFFFFFF)).withOpacity(0.5),
-                  Color(0xFFffffff).withOpacity(0.5),
+                  const Color((0xFFFFFFFF)).withOpacity(0.5),
+                  const Color(0xFFffffff).withOpacity(0.5),
                 ],
               ),
               height: 80,
               width: 1000,
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
@@ -50,7 +50,7 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                     }));
                   },
                   child: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -61,8 +61,8 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                                 width: 60,
                                 height: 60,
                                 child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(20)),
                                     child: Image.network(
                                       snapshot.data?.thumb_url ?? '',
                                       fit: BoxFit.fill,
@@ -70,7 +70,8 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 20),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -78,7 +79,7 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                                     children: [
                                       Text(
                                         snapshot.data?.originName ?? '',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                         ),
@@ -115,10 +116,10 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                                         ? 1
                                         : int.parse(
                                             recentMovie.durationInSeconds)),
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.red),
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                    Colors.red),
                               ),
-                              Icon(Icons.play_arrow_outlined)
+                              const Icon(Icons.play_arrow_outlined)
                             ],
                           ),
                         )
@@ -128,8 +129,9 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
             );
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());
-          } else
+          } else {
             return Container();
+          }
         });
   }
 }
