@@ -64,7 +64,7 @@ class _CustomSearchDelegateState extends State<CustomSearchDelegate> {
                     if (snapshot.hasData) {
                       List<String> slugList =
                           snapshot.data?.listOfMovies as List<String>;
-                      for (var item in slugList)
+                      for (var item in slugList) {
                         return Container(
                           constraints:
                               BoxConstraints(maxHeight: Const.screenHeight),
@@ -92,6 +92,7 @@ class _CustomSearchDelegateState extends State<CustomSearchDelegate> {
                             ]))
                           ]),
                         );
+                      }
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     }
@@ -100,82 +101,3 @@ class _CustomSearchDelegateState extends State<CustomSearchDelegate> {
     );
   }
 }
-
-// class CustomSearchDelegate extends StatelessWidget {
-//   final myControllerTextField = TextEditingController();
-//   CustomSearchDelegate({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Theme.of(context).backgroundColor,
-//       appBar: AppBar(
-//           // The search area here
-//           title: Container(
-//         width: double.infinity,
-//         height: 40,
-//         decoration: BoxDecoration(
-//             color: Colors.white12, borderRadius: BorderRadius.circular(5)),
-//         child: Center(
-//           child: TextField(
-//             onSubmitted: (value) {
-//               print(myControllerTextField.value);
-//               //value is entered text after ENTER press
-//               //you can also call any function here or make setState() to assign value to other variable
-//             },
-//             controller: myControllerTextField,
-//             autofocus: true,
-//             decoration: InputDecoration(
-//                 prefixIcon: const Icon(Icons.search),
-//                 suffixIcon: IconButton(
-//                   icon: const Icon(Icons.clear),
-//                   onPressed: () {
-//                     myControllerTextField.clear();
-//                   },
-//                 ),
-//                 hintText: 'Search...',
-//                 border: InputBorder.none),
-//           ),
-//         ),
-//       )),
-//       body: Container(
-//           child: FutureBuilder<Playlist>(
-//               future: FutureGetMoviesBySearch(path),
-//               builder: (context, snapshot) {
-//                 if (snapshot.hasData) {
-//                   List<String> slugList =
-//                       snapshot.data?.listOfMovies as List<String>;
-//                   return Container(
-//                     constraints: BoxConstraints(maxHeight: Const.screenHeight),
-//                     child: Column(children: [
-//                       Expanded(
-//                           child: ListView(children: [
-//                         Wrap(
-//                           alignment: WrapAlignment.center,
-//                           children: [
-//                             for (String e in slugList)
-//                               FutureBuilder<Movie>(
-//                                 future: FutureGetMovies(e),
-//                                 builder: (context, snapshot) {
-//                                   if (snapshot.hasData) {
-//                                     return MovieFilteredByCategoryCard(
-//                                         snapshot.data);
-//                                   } else if (snapshot.hasError)
-//                                     return Text('${snapshot.error}');
-//                                   else
-//                                     return Container();
-//                                 },
-//                               ),
-//                           ],
-//                         )
-//                       ]))
-//                     ]),
-//                   );
-//                 } else if (snapshot.hasError) {
-//                   return Text('${snapshot.error}');
-//                 }
-//                 return Container();
-//               })),
-//     );
-//   }
-// }

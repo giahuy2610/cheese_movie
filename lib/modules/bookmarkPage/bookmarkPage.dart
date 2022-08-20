@@ -30,7 +30,7 @@ class BookmarkPage extends StatelessWidget {
                         Expanded(
                             child: ListView(children: [
                           Wrap(
-                            alignment: WrapAlignment.center,
+                            alignment: WrapAlignment.start,
                             children: [
                               for (String e in slugList)
                                 FutureBuilder<Movie>(

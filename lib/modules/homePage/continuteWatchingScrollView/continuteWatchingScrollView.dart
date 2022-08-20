@@ -10,12 +10,12 @@ class ContinuteWatchingScrollView extends StatefulWidget {
   const ContinuteWatchingScrollView({Key? key}) : super(key: key);
 
   @override
-  State<ContinuteWatchingScrollView> createState() => _ContinuteWatchingScrollViewState();
+  State<ContinuteWatchingScrollView> createState() =>
+      _ContinuteWatchingScrollViewState();
 }
 
-class _ContinuteWatchingScrollViewState extends State<ContinuteWatchingScrollView> {
-
-
+class _ContinuteWatchingScrollViewState
+    extends State<ContinuteWatchingScrollView> {
   Widget build(BuildContext context) {
     context.select<Controller, int>((e) => e.isChangeWatchingMovieList);
     return Container(

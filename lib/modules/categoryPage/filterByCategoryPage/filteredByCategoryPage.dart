@@ -41,17 +41,13 @@ class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
           ],
         ),
         body: Container(
-          //padding: EdgeInsets.all(20),
-          width: Const.screenWidth,
-          height: Const.screenHeight,
-          child: ListView(
-            children: [
-              FutureBuilder<Playlist>(
-                  future: FutureGetMoviesByCategory(path),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<String> slugList =
-                          snapshot.data?.listOfMovies as List<String>;
+            child: FutureBuilder<Playlist>(
+                future: FutureGetMoviesByCategory(path),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<String> slugList =
+                        snapshot.data?.listOfMovies as List<String>;
+                    for (var item in slugList) {
                       return Container(
                         constraints:
                             BoxConstraints(maxHeight: Const.screenHeight),
@@ -59,7 +55,7 @@ class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
                           Expanded(
                               child: ListView(children: [
                             Wrap(
-                              alignment: WrapAlignment.center,
+                              //alignment: WrapAlignment.center,
                               children: [
                                 for (String e in slugList)
                                   FutureBuilder<Movie>(
@@ -79,13 +75,11 @@ class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
                           ]))
                         ]),
                       );
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
                     }
-                    return Container();
-                  })
-            ],
-          ),
-        ));
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return Container();
+                })));
   }
 }

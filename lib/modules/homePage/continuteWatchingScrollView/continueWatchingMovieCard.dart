@@ -72,7 +72,9 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                           SlidableAction(
                             onPressed: (_) {
                               deleteRecentMovie(recentMovie.slug);
-                              context.read<Controller>().setIsChangeWatchingMovieList();
+                              context
+                                  .read<Controller>()
+                                  .setIsChangeWatchingMovieList();
                             },
                             backgroundColor: Color(0xFFFE4A49),
                             foregroundColor: Colors.white,
