@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/controller.dart';
@@ -11,14 +12,18 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  var isLogin = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
         child: context.select<Controller, bool>((e) => e.isLogin)
-            ? Container()
+            ? TextButton(
+                style: TextButton.styleFrom(backgroundColor: Colors.white24),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  context.read<Controller>().setLogIn(false);
+                },
+                child: Text('Đăng xuất'))
             : TextButton(
                 style: TextButton.styleFrom(backgroundColor: Colors.white24),
                 onPressed: () {

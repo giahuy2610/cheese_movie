@@ -46,6 +46,7 @@ class _PlayerState extends State<Player> {
 
             videoPlayerController.pause(); //pausing  functionality
             videoPlayerController.dispose();
+            context.read<Controller>().setIsChangeWatchingMovieList();
           }
         },
         child: Container(
