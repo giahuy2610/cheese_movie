@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>890356322716-5esj2dvr5ndr8767pesna1kprtc4k1kk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.890356322716-5esj2dvr5ndr8767pesna1kprtc4k1kk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBFnL_yt7cqegY08HJ7F3AFJlEWs3tbRGA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>890356322716</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.cheeseMovie</string>
+	<key>PROJECT_ID</key>
+	<string>cheese-movie</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cheese-movie.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:890356322716:ios:78d5ad4c0c5601bcfdb859</string>
+	<key>DATABASE_URL</key>
+	<string>https://cheese-movie-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

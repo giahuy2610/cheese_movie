@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "890356322716",
+    "firebase_url": "https://cheese-movie-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cheese-movie",
+    "storage_bucket": "cheese-movie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890356322716:android:d5ebd0e53c8dfbf1fdb859",
+        "android_client_info": {
+          "package_name": "com.example.cheese_movie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890356322716-st3jnjv4ns2lfu0i45fh7pjqtnch0es8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXZghxTzwhqb2nxSbbib6YuPOXLiof_uA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890356322716-st3jnjv4ns2lfu0i45fh7pjqtnch0es8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
