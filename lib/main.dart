@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import './modules/categoryPage/categoryPage.dart';
 import './modules/bookmarkPage/bookmarkPage.dart';
 import './modules/userPage/userPage.dart';
-import './modules/userPage/loginPage/loginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';

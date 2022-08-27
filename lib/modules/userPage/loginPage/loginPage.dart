@@ -62,59 +62,71 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Email'),
-                          TextField(
-                            controller: myControllerEmailTextField,
-                          )
-                        ],
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      child: TextField(
+                        controller: myControllerEmailTextField,
+                        //onChanged: (){},
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          hintText: "Enter email",
+                        ),
                       ),
                     ),
                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Password'),
-                          TextFormField(
-                              controller: myControllerPasswordTextField)
-                        ],
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      child: TextField(
+                        controller: myControllerPasswordTextField,
+                        obscureText: true,
+                        //onChanged: (){},
+                        obscuringCharacter: "*",
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                          hintText: "Enter password",
+                        ),
                       ),
                     ),
                     isRegister
-                        ? AnimatedContainer(
-                            duration: Duration(seconds: 1),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text('Confirm Password'),
-                                TextFormField(
-                                    controller:
-                                        myControllerConfirmPasswordTextField)
-                              ],
+                        ? Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            child: TextField(
+                              controller: myControllerConfirmPasswordTextField,
+                              obscureText: true,
+                              //onChanged: (){},
+                              obscuringCharacter: "*",
+                              decoration: const InputDecoration(
+                                labelText: 'Password',
+                                hintText: "Enter password",
+                              ),
                             ),
                           )
                         : Container(),
-                    TextButton(
-                      onPressed: () {
-                        this.isRegister
-                            ? register(
-                                context,
-                                myControllerEmailTextField.value.text.trim(),
-                                myControllerPasswordTextField.value.text.trim())
-                            : signIn(
-                                context,
-                                myControllerEmailTextField.value.text.trim(),
-                                myControllerPasswordTextField.value.text
-                                    .trim());
-                        print(FirebaseAuth.instance.currentUser);
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => Colors.white12)),
-                      child: Text(isRegister ? 'Register' : 'Login'),
-                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      child: TextButton(
+                        onPressed: () {
+                          this.isRegister
+                              ? register(
+                                  context,
+                                  myControllerEmailTextField.value.text.trim(),
+                                  myControllerPasswordTextField.value.text
+                                      .trim())
+                              : signIn(
+                                  context,
+                                  myControllerEmailTextField.value.text.trim(),
+                                  myControllerPasswordTextField.value.text
+                                      .trim());
+                          print(FirebaseAuth.instance.currentUser);
+                        },
+                        style: ButtonStyle(
+                            //textStyle: TextStyle(fontSize: 25),
+                            minimumSize:
+                                MaterialStateProperty.all(const Size(400, 50)),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.white12)),
+                        child: Text(isRegister ? 'Register' : 'Login'),
+                      ),
+                    )
+
                     // AlternativeWay(),
                   ],
                 ),
@@ -124,14 +136,14 @@ class _LoginPageState extends State<LoginPage> {
                       text: TextSpan(
                         // Note: Styles for TextSpans must be explicitly defined.
                         // Child text spans will inherit styles from parent
-                        style: TextStyle(),
+                        style: const TextStyle(),
                         children: <TextSpan>[
                           const TextSpan(text: "Already have an account? "),
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 setState(() {
-                                  this.isRegister = false;
+                                  isRegister = false;
                                 });
                               },
                             text: 'Login',
@@ -147,9 +159,9 @@ class _LoginPageState extends State<LoginPage> {
                       text: TextSpan(
                         // Note: Styles for TextSpans must be explicitly defined.
                         // Child text spans will inherit styles from parent
-                        style: TextStyle(),
+                        style: const TextStyle(),
                         children: <TextSpan>[
-                          TextSpan(text: "Don't have an acoount? "),
+                          const TextSpan(text: "Don't have an account? "),
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {

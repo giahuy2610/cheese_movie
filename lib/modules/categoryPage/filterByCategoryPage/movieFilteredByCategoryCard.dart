@@ -39,12 +39,12 @@ class MovieFilteredByCategoryCard extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                           softWrap: false,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.fade,
                         ),
                         Text(
                           movie.actors.toString(),
                           softWrap: false,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.fade,
                         )
                       ],
                     ),

@@ -10,10 +10,11 @@ import '../../../models/storeRecentMovieCache.dart';
 import '../../../providers/controller.dart';
 import '../../engjoyMoviePage/enjoyMoviePage.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'dart:convert';
 
 class ContinuteWatchingMovieCard extends StatelessWidget {
   final recentMovie;
-  const ContinuteWatchingMovieCard(this.recentMovie);
+  ContinuteWatchingMovieCard(this.recentMovie, {Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
     return FutureBuilder<Movie>(
@@ -56,7 +57,7 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                   },
                   child: Slidable(
                       // Specify a key if the Slidable is dismissible.
-                      key: const ValueKey(0),
+                      key: UniqueKey(),
 
                       // The start action pane is the one at the left or the top side.
                       startActionPane: ActionPane(
@@ -64,13 +65,30 @@ class ContinuteWatchingMovieCard extends StatelessWidget {
                         motion: const ScrollMotion(),
 
                         // A pane can dismiss the Slidable.
-                        dismissible: DismissiblePane(onDismissed: () {}),
+                        // dismissible: DismissiblePane(onDismissed: () {
+                        //   // print('vuydvudagsuasdgyudasgusagasud');
+                        //   // deleteRecentMovie(recentMovie.slug);
+                        //   // context
+                        //   //     .read<Controller>()
+                        //   //     .setIsChangeWatchingMovieList();
+                        // }),
 
                         // All actions are defined in the children parameter.
                         children: [
                           // A SlidableAction can have an icon and/or a label.
                           SlidableAction(
                             onPressed: (_) {
+                              //print(int.parse(key!.toString()[3]));
+                              // context
+                              //     .read<Controller>()
+                              //     .watchingListGlobalKey
+                              //     .currentState!
+                              //     .removeItem(int.parse(key!.toString()[3]),
+                              //         (context, animation) {
+                              //   return ContinuteWatchingMovieCard(
+                              //       this.recentMovie);
+                              // });
+
                               deleteRecentMovie(recentMovie.slug);
                               context
                                   .read<Controller>()

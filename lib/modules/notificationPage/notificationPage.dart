@@ -24,7 +24,20 @@ class _NotificationPageState extends State<NotificationPage> {
             //padding: EdgeInsets.all(20),
             width: Const.screenWidth,
             height: Const.screenHeight,
-            alignment: Alignment.center,
-            child: Text('Không có thông báo')));
+            child: GestureDetector(
+              onHorizontalDragUpdate: (details) {
+// Note: Sensitivity is integer used when you don't want to mess up vertical drag
+                int sensitivity = 8;
+                if (details.delta.dx > sensitivity) {
+// Right Swipe
+                } else if (details.delta.dx < -sensitivity) {
+                  Navigator.pop(context);
+                }
+              },
+              child: Container(
+                  color: Colors.transparent,
+                  alignment: Alignment.center,
+                  child: Text('Không có thông báo')),
+            )));
   }
 }

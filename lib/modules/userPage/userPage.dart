@@ -1,8 +1,11 @@
+import 'package:cheese_movie/modules/userPage/myMovies/myMovies.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../providers/const.dart';
 import '../../providers/controller.dart';
 import 'loginPage/loginPage.dart';
+import './userInfo/userInfo.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -14,16 +17,19 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
+    print(FirebaseAuth.instance.currentUser?.uid);
     return Container(
         alignment: Alignment.center,
+        constraints: BoxConstraints(maxHeight: Const.screenHeight),
         child: context.select<Controller, bool>((e) => e.isLogin)
-            ? TextButton(
-                style: TextButton.styleFrom(backgroundColor: Colors.white24),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  context.read<Controller>().setLogIn(false);
-                },
-                child: Text('Đăng xuất'))
+            ? Column(
+                children: [
+                  Expanded(
+                    child: UserInfoCard(),
+                  ),
+                  MyMovies(),
+                ],
+              )
             : TextButton(
                 style: TextButton.styleFrom(backgroundColor: Colors.white24),
                 onPressed: () {

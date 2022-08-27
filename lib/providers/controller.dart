@@ -10,6 +10,8 @@ class Controller extends ChangeNotifier {
   var isChangeWatchingMovieList = 1;
   List<String> bookmarkSlug = List<String>.empty(growable: true);
 
+  final watchingListGlobalKey = GlobalKey<AnimatedListState>();
+
   void setIsChangeWatchingMovieList() {
     isChangeWatchingMovieList++;
     notifyListeners();

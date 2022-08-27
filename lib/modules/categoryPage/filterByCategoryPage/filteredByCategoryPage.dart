@@ -60,44 +60,54 @@ class _FilteredByCategoryPageState extends State<FilteredByCategoryPage> {
                 icon: Icon(Icons.search_rounded))
           ],
         ),
-        body: Container(
-            child: FutureBuilder<Playlist>(
-                future: FutureGetMoviesByCategory(path, pageNum),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    slugList += snapshot.data?.listOfMovies as List<String>;
-                    return Container(
-                      constraints:
-                          BoxConstraints(maxHeight: Const.screenHeight),
-                      child: Column(children: [
-                        Expanded(
-                            child: ListView(
-                                controller: scrollController,
-                                children: [
-                              Wrap(
-                                children: [
-                                  for (String e in slugList)
-                                    FutureBuilder<Movie>(
-                                      future: FutureGetMovies(e),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasData) {
-                                          return MovieFilteredByCategoryCard(
-                                              snapshot.data);
-                                        } else if (snapshot.hasError)
-                                          return Text('${snapshot.error}');
-                                        else
-                                          return Container();
-                                      },
-                                    ),
-                                ],
-                              )
-                            ]))
-                      ]),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-                  return Container();
-                })));
+        body: GestureDetector(
+            onHorizontalDragUpdate: (details) {
+// Note: Sensitivity is integer used when you don't want to mess up vertical drag
+              int sensitivity = 8;
+              if (details.delta.dx > sensitivity) {
+// Right Swipe
+              } else if (details.delta.dx < -sensitivity) {
+                Navigator.pop(context);
+              }
+            },
+            child: Container(
+                child: FutureBuilder<Playlist>(
+                    future: FutureGetMoviesByCategory(path, pageNum),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        slugList += snapshot.data?.listOfMovies as List<String>;
+                        return Container(
+                          constraints:
+                              BoxConstraints(maxHeight: Const.screenHeight),
+                          child: Column(children: [
+                            Expanded(
+                                child: ListView(
+                                    controller: scrollController,
+                                    children: [
+                                  Wrap(
+                                    children: [
+                                      for (String e in slugList)
+                                        FutureBuilder<Movie>(
+                                          future: FutureGetMovies(e),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              return MovieFilteredByCategoryCard(
+                                                  snapshot.data);
+                                            } else if (snapshot.hasError)
+                                              return Text('${snapshot.error}');
+                                            else
+                                              return Container();
+                                          },
+                                        ),
+                                    ],
+                                  )
+                                ]))
+                          ]),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text('${snapshot.error}');
+                      }
+                      return Container();
+                    }))));
   }
 }

@@ -47,7 +47,6 @@ class _PlayerState extends State<Player> {
 
             videoPlayerController.pause(); //pausing  functionality
             videoPlayerController.dispose();
-
           }
         },
         child: Container(
