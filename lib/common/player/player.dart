@@ -38,6 +38,7 @@ class _PlayerState extends State<Player> {
         key: Key('player'),
         onVisibilityChanged: (visibility) {
           if (visibility.visibleFraction == 0) {
+            //context.read<Controller>().setIsChangeWatchingMovieList();
             addNewRecentMovie(
                 movie.slug,
                 '1',
@@ -46,7 +47,7 @@ class _PlayerState extends State<Player> {
 
             videoPlayerController.pause(); //pausing  functionality
             videoPlayerController.dispose();
-            context.read<Controller>().setIsChangeWatchingMovieList();
+
           }
         },
         child: Container(
